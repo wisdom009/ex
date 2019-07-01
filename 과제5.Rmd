@@ -1,0 +1,523 @@
+---
+title: "과5"
+author: "park"
+date: '2019 6 12 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("D:/workspace/R_date/Part2/새 폴더")
+library(rJava)
+library(RColorBrewer)
+library(wordcloud)
+library(stringr)
+library(KoNLP)
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## R Markdown
+
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_01.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+data3 = gsub("애완견","",data3)
+data3 = gsub("목줄","",data3)
+
+write(unlist(data3), "응답소_2015_01_gsub.txt")
+data4=read.table("응답소_2015_01_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set2")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(3, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+
+
+```{r }
+useSejongDic()
+
+data1= readLines("응답소_2015_02.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+data3 = gsub("\\상담내용","상담",data3)
+data3 = gsub("\\-'","",data3)
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+data3 = gsub("애완견","",data3)
+data3 = gsub("목줄","",data3)
+
+write(unlist(data3), "응답소_2015_01_gsub.txt")
+data4=read.table("응답소_2015_01_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+head(unlist(data4))
+palete = brewer.pal(7, "Set2")
+
+wordcloud(names(wordcount),freq=wordcount ,scale=c(1,0.1),
+          min.freq=1,colors=palete,
+          random.order=F,random.color=T)
+
+```
+
+```{r }
+
+useSejongDic()
+
+data1= readLines("응답소_2015_03.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+
+
+write(unlist(data3), "응답소_2015_03_gsub.txt")
+data4=read.table("응답소_2015_03_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set2")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(2, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_05.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+
+
+write(unlist(data3), "응답소_2015_05_gsub.txt")
+data4=read.table("응답소_2015_05_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set1")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(1, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_06.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+
+
+write(unlist(data3), "응답소_2015_06_gsub.txt")
+data4=read.table("응답소_2015_06_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set1")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(3, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_07.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+
+
+write(unlist(data3), "응답소_2015_07_gsub.txt")
+data4=read.table("응답소_2015_07_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set3")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(2, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_08.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+
+
+write(unlist(data3), "응답소_2015_08_gsub.txt")
+data4=read.table("응답소_2015_08_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set3")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(2, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_09.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+
+write(unlist(data3), "응답소_2015_09_gsub.txt")
+data4=read.table("응답소_2015_09_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set3")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(2, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_10.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+
+
+write(unlist(data3), "응답소_2015_10_gsub.txt")
+data4=read.table("응답소_2015_10_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set3")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(2, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_11.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+
+
+write(unlist(data3), "응답소_2015_11_gsub.txt")
+data4=read.table("응답소_2015_11_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set3")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(2, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)
+
+```
+
+```{r}
+
+useSejongDic()
+
+data1= readLines("응답소_2015_12.txt")
+
+data2 = sapply(data1, extractNoun, USE.NAMES = F)
+
+data3 = unlist(data2)
+
+data3= Filter(function(x) {nchar(x) >= 2}, data3)
+
+head(unlist(data3),30)
+
+data3 = gsub("\\='","",data3)
+data3 = gsub("\\'","",data3)
+data3 = gsub("\\.","",data3)
+data3 = gsub("\\d+","",data3)
+data3 = gsub("[ㄱ-ㅎ]","",data3)
+data3 = gsub("(ㅜ|ㅠ)","",data3)
+data3 = gsub("[0-9]","",data3)
+data3 = gsub("[a-z]","",data3)
+data3 = gsub("[A-Z]","",data3)
+data3 = gsub(" ","",data3)
+data3 = gsub("Q","",data3)
+data3 = gsub("","",data3)
+data3 = gsub("제목","",data3)
+data3 = gsub("아니고","",data3)
+data3 = gsub("서울시","",data3)
+data3 = gsub("서울","",data3)
+data3 = gsub("상담내용","",data3)
+data3 = gsub("--상담내용","",data3)
+
+write(unlist(data3), "응답소_2015_12_gsub.txt")
+data4=read.table("응답소_2015_12_gsub.txt",quote="")
+nrow(data4)
+
+wordcount = table(data4)
+
+palete = brewer.pal(10, "Set1")
+
+wordcloud(names(wordcount),freq=wordcount,scale = c(3, 0.1),rot.per=0.25,min.freq=1,
+          random.order=F,random.color=T,colors=palete)

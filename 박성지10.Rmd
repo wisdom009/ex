@@ -1,0 +1,111 @@
+---
+title: '10'
+author: "park"
+date: '2019 6 25 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r }
+#6-1
+#학교 50%가 대중교통 이용(100,1/2)
+x = rnorm(100,1/2,5)
+mean(x)
+sd(x)
+
+t.test(x) 
+
+#어느 대학교 학생들의 대중교통을 통해등교하는 학생의 비율 알아보기.
+#학생을 100명이라 임의 추출후 50%에 해당하는 학생이 대중교통을 이용한다.
+#mu값이 절반인 50, 그리고 One Sample t-test 의 p.value의 갑이0.04이다
+#전체를 5라고 가정하고 0.02~1.9 가 95퍼센트의 신뢰구간이 편성.
+# m < 0.5 로서 h0에 해당항의로 귀무가설이 체택된다
+```
+
+```{r }
+#6-2(100,4/5)
+dd= rnorm(100,4/5,10)
+t.test(dd)
+
+#음식점에서 신메뉴를 출시 후 100명을 상대로 선호도를 조사했다.
+#이중 4/5 가 메뉴를 선호한다고 응답했다.
+#이 데이터를 활용하여 p데이터를 추출한 결과 0.3 이라는 결과가 나왔다
+#p 에다터가  0.5 이하임으로 h0가 체택된다
+```
+
+```{r }
+# 6-4
+ee=rnorm(1000, 430, 20)
+mean(ee)
+sd(ee)
+t.test(ee)
+t.test(ee,conf.level = 0.90)
+
+
+#대한민국 성인 남성 1000을 대상으로 조사한 표본이다
+#1000명중 430명이 흡연을 하고있다
+#이 표본을 근거로 90% 신뢰도를 p데이터로 구해보았다
+# p데이터는 mu < 2.2 0.5 를 초과한 흡연율을 보임으로 h1에 해당한다
+```
+
+```{r }
+# 7-1
+mu=1000
+n=10
+a = c(980, 1008, 968, 1032, 1012, 996, 1021, 1002, 996, 1017)
+mean(a)
+sd(a)
+t.test(a , mu = 1000)
+
+#A회사의 건전지의 수명시간이 1000시간 일 때,무작위로 뽑은 10개의 건전지에 대한 수명은
+#980, 1008, 968, 1032, 1012, 996, 1021, 1002, 996, 1017 라고할때 평균은 1003이다
+#이 자료를 근거로 p데이터를 추출결과 0.6이 나왔고 h1에 해당
+```
+
+```{r }
+
+# 7-2
+mu= 55
+z= c(58, 49, 39, 99, 32, 88, 62, 30, 55, 65, 44, 55, 57, 53, 88, 42, 39)
+ex=mean(z)
+s=sd(z)
+t.test(z, mu = 55)
+h0 = 55
+t.t = (ex - h0) / (s / sqrt(n))
+a = 0.05 
+c.t = pt(1-a, df=n-1)
+p.value = 1-pt(t.t, df=n-1)
+t.test(z, mu = 55 )
+
+#반의 학생들의 수학 평균성적은 55점이었다
+# 0교시 수업 이후의 성적은 58, 49, 39, 99, 32, 88, 62, 30, 55, 65, 44, 55, 57, 53, 88, 42, 39 이다
+# 이 표본으로 0교시 이후에 성적이 올랐는지 
+# p데이터가 0.8 > mu 임으로 h1에 해당 0교시 이후에 학생들의 성적이 변한것을 알 수 있다
+
+```
+
+```{r }
+
+#7-3
+mu=8.1
+ac =c(15.50, 11.21, 12.67, 8.87, 12.15, 9.88, 2.06, 14.50, 0, 4.97)
+mean(ac)
+sd(ac)
+t.test(ac, mu=8.1)
+
+#2006년 한국인의 1인 평균 알콜 섭취랑이 8.1g이다
+#2008년 무작위 알콜 섭취량은 15.50, 11.21, 12.67, 8.87, 12.15, 9.88, 2.06, 14.50, 0, 4.97 이다
+#그를 근거로 2006년과 2008년의 알콜 섭취량이 달라졌나?
+#추출한 p데이터는 0.53 으로  mu < 0.53 으로 h1이다
+```
+
+

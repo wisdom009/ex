@@ -1,0 +1,122 @@
+---
+title: "park"
+author: "park"
+date: '2019 6 14 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+# 1
+ver1= c(1:6)  # 1,2,3,4,5,6
+ver2=c(10:5)  # 10,9,8,7,6,5
+ver3=rep(1:3, each=2)  # 1,1,2,2,3,3
+ver4=rep(1:3,2)  #,1,2,3,1,2,3
+ver5= seq(1,11,2) # 1,3,5,7,9,11
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+#2
+이름= c('강격학','김태균','이성열','정은원')
+중간= c(90,78,94,70)
+기말= c(50,60,90,92)
+df_score = data.frame(이름,중간,기말)
+df_score
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r}
+#4
+oddsum =  for (i in 1:100) {
+    print(i)
+  }
+
+```
+
+
+```{r}
+
+# 5
+library(ggplot2)
+library(dplyr)
+
+iris
+iris_setosa <- filter(iris, Species == 'setosa')
+
+boxplot(iris_setosa$Sepal.Width)
+
+```
+
+```{r}
+
+# 6
+library(ggplot2)
+mpg %>%
+  group_by(model)%>%
+  select(manufacturer, model,  cty, hwy)%>%
+  mutate(cty_hwy = cty + hwy) %>%
+  filter(manufacturer %in% 'toyota') %>%
+  arrange(desc(cty_hwy)) %>%
+  head(3)
+
+```
+
+```{r}
+
+# 7
+library(ggplot2)
+aa= mpg %>%
+  group_by(manufacturer) %>%
+  select(manufacturer,class, cty) %>%
+  filter(class %in% "suv") %>%
+  summarise_each(funs(n())) %>%
+  arrange(desc(class)) %>%
+  head(7)
+aa
+
+ggplot(aa, aes(x=manufacturer, y=cty, fill= manufacturer))+
+  geom_bar(stat = 'identity') 
+
+```
+
+```{r}
+# 8
+library(ggplot2)
+diamonds
+
+ggplot(diamonds, aes(x=diamonds$clarity , fill=diamonds$clarity)) +
+  geom_bar()
+
+ggplot(diamonds, aes(x=diamonds$clarity , y=diamonds$price)) +
+  geom_bar(stat = "identity" , fill="darkblue") 
+```
+
+
+```{r}
+setwd("d:/workspace/R_date/Part2/Stage3_StructuredData")
+bb = read.csv("야구성적.csv")  
+bb
+ob = bb %>%
+  select(선수명,연봉 , 출루율, 장타율, 연봉대비출루율) %>%
+  mutate( ops = (출루율 + 장타율)) %>%
+  mutate( 연봉대비ops = (ops / 연봉 * 100))
+ob
+
+ggplot(ob, aes(x=ob$선수명, y=ob$연봉대비ops, fill=선수명)) +
+  geom_bar(stat='identity', fill='blue')+
+  theme(axis.text.x=element_text(angle=90, hjust=1, vjust=1,size=9))
+
+    
+
+```

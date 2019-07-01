@@ -1,0 +1,118 @@
+---
+title: "ex8"
+author: "park"
+date: '2019 6 21 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(prob)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+#4- 1-2
+dbinom(1,2,1/2)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+#4- 1-3
+sample(1:6, 1)
+
+```
+
+```{r}
+#4- 1-4
+sample(1:6, 1)
+n = 6
+p = 1/6
+dbinom(1, 6, p)
+```
+
+```{r}
+# 4-2
+n = 10
+p = 4/5
+
+dbinom(7,10,0.8)
+```
+
+
+```{r}
+
+# 4-3
+
+n = 20
+p = 0.05
+
+pbinom(2,20,p)
+
+```
+
+```{r}
+#4-4
+n = 20
+p = 0.2
+
+pbinom(1,20,0.2)
+1-pbinom(1,20,0.2)
+```
+
+```{r}
+# 4-5
+
+n =12
+p= 5/36
+
+dbinom(1,12,5/36)
+
+```
+
+```{r}
+# 5-1
+n=800
+p=40
+x=750
+pnorm(750, 800, 40)
+
+```
+
+```{r}
+# 5-2
+n=  c (11:16,5)
+p=20
+p=0.1
+
+1 - pnorm(20,11,5)
+```
+
+```{r}
+#5-4
+n=70
+p=8
+
+pnorm(90,70,8)
+pnorm(90,70,8) - pnorm(80,70,8)
+
+pnorm(3,1.5,2)
+```
+
+
+```{r}
+#5-4
+
+n=1.5
+p=2
+x=1 & 3
+pnorm(3,1.5,2)
+```

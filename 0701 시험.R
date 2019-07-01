@@ -1,0 +1,58 @@
+# 1 
+dbinom(3,6,1/3) # 시행횟수 6ㅎ이고 성공 이 1/3 인 성공횟수 3이 될 확률
+qnorm(0.8,mean=170,sd=6) #평균이 170 편차가 6인 분포에서 상위 20% 사람들의 키의 범위
+pchisq(q=1, df=2, lower.tail = T) # 자유도 3인 카이제곱분포에서 누적확률 95%일때 값
+pt(0.975, df=2) # 자유도 2인 0.975일때의 값
+pnorm(1,mean=0,sd=1) # 표준 정규분포 확률변수 1일때의 값
+
+#2
+dbinom(1,2,1/2) #전화를 받을때 전화한 사람이 여자인지 측정
+dbinom(1,6,1/6) # 주사위 숫자 체크
+pbinom(1,2,1/2) # 동전의 앞면이 나올 확률 
+
+#3 iris
+st=filter(iris, Species == 'setosa')
+table(st$Sepal.Length)
+t.test(st$Sepal.Length)
+
+#4 농구 자유투 10번중7번 성공 
+dbinom(9,10,7/10)
+(dbinom(5,10,7/10)- dbinom(8,10,7/10))
+
+#5 2006년 알콜 평균 섭췰량 8.1 2008년 무작위 알콜
+a = c(16.90,13.21,15.67,9.87,13.15,9.18,3.56,14.50,8.12,6.97)
+shapiro.test(a)
+t.test(a, mu=8.1)
+
+#정규분포에서 from <= x <= to 를 구하는 함수 h0 ,h1
+r=c(from=-1.96,to= 1.96,mean= 0,sd=1)
+t.test(r)
+shapiro.test(r)
+
+
+#7 mpg 검정 특정 클레스 도시연비
+shapiro.test(mpg$cty[mpg$class == 'subcompact'])
+qqnorm(mpg$cty[mpg$class == 'subcompact']); qqline(mpg$cty[mpg$class=='subcompact'])
+
+shapiro.test(mpg$cty[mpg$class == 'midsize'])
+qqnorm(mpg$cty[mpg$class == 'midsize']); qqline(mpg$cty[mpg$class=='midsize'])
+
+#mpg 연료별 고속도로 연비
+shapiro.test(mpg$hwy[mpg$fl == 'p'])
+qqnorm(mpg$hwy[mpg$fl == 'p']) ; qqline(mpg$hwy[mpg$fl == 'p'])
+
+shapiro.test(mpg$hwy[mpg$fl == 'r'])
+qqnorm(mpg$hwy[mpg$fl == 'r']) ; qqline(mpg$hwy[mpg$fl == 'r'])
+
+#8 멘델 유전법칙 완두가 각 9:3:3:1 의 비율로 나타난 유전법칙이 가설검정
+b = c(322,109,99,29)
+d= c(9/16,3/16,3/16,1/16)
+chisq.test(b,d)
+
+#9 women 키와 몸무게 곡선회구분석
+#women
+lm(women$height~ women$weight)
+lm(women$height ~ I(women$height^2) + women$weight)
+
+
+
